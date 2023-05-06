@@ -93,6 +93,10 @@ a:hover {
 
 
 /* -----TASKBOARD BELOW----- */
+.taskboard-body {
+    display: flex;
+    justify-content: center;
+}
 .group {
   display: flex;
   justify-content: center;
