@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TaskBoard</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+    <nav class="nav-bar">
+        <div class="nav-items">
+            <h3 id="nav-item">
+                <a href="/group">
+                    <span id="nav-text">GROUPS</span>
+                </a>
+            </h3>
+            <h3 id="nav-item">
+                <a href="/motivation">
+                    <span id="nav-text">MOTIVATION...</span>
+                </a>
+            </h3>
+            <h3 id="nav-item">
+                <a href="/">
+                <span id="nav-text">Log out</span>
+                </a>
+            </h3>
+        </div>
+    </nav>
+    <body>
+    <div id ="group-body">
+    <div className="collaborate--items" id="group-div">
+    <div id="coll-title">JOIN A TASK GROUP!</div>
+        <div className="form-items">
+            <div className="add-collaborators">
+                <form method="post" action="{{ url_for('join_group') }}">
+                    {% for group in groups %}
+                    <button id="nav-item" type="submit" name="group" value="{{ group[1] }}">{{ group[1] }}</button>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </body> 
+</html>

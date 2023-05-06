@@ -6,7 +6,7 @@ def add_user(username, password):
     print(conn)
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO users (username, passcode) VALUES ( ?, ?)", 
+        "INSERT INTO users (username, passcode) VALUES (?, ?)", 
         (username, password)
     )
     conn.commit()
@@ -25,75 +25,106 @@ def find_user(username):
     conn.close()
     return fetched
 
+
+
 #SQL managining dashboard statements -------- Nikita's code
-
-
 #SQL SELECT statement to extract all tasks of a user, based on group name
-# def task_select_by_group_name(): #argument parameters ---> groupname
-#     groupname = "group1"
-#     conn = sqlite3.connect('data.db')
-#     print(conn)
-#     sql =  """SELECT task_name 
-#         from task
-#         inner join groups on groups.group_id = task.group_id AND group_name = '{}' """.format(groupname)    
-#     cursor = conn.cursor()
-#     cursor.execute(sql)
-#     for i in cursor:
-#         print(i)
-#     conn.commit()
-#     cursor.close()
-#     conn.close()
+def task_select_by_group_name(groupname): #argument parameters ---> groupname
+    conn = sqlite3.connect('data.db')
+    print(conn)
+    sql =  """SELECT task_name, task_status 
+        from task
+        inner join groups on groups.group_id = task.group_id AND group_name = '{}' """.format(groupname)    
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    fetched = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return fetched
  
- 
-# #SQL (mainly) INSERT statement to add a task to db
-# def insert_task(): #argument parameters ---> taskname, groupname, taskstatus
-#     groupname = "group1"
-#     taskname = "file papers"
-#     taskstatus = "NS"
+def get_groups():
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT * FROM groups" 
+    )
+    fetched = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return fetched
+
+def find_group(group_name):
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT * FROM groups
+           WHERE group_name = ?
+        """,
+        (group_name,)
+    )
+    fetched = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return fetched
+
+def add_user_to_group(user_id, group_id):
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM groupinfo WHERE user_id=?", (user_id,))
+    existing_record = cursor.fetchone()
+
+    if existing_record:
+        # Update the existing record
+        cursor.execute("UPDATE groupinfo SET group_id=? WHERE user_id=?", (group_id, user_id))
+    else:
+        # Insert a new record
+        cursor.execute("INSERT INTO groupinfo (user_id, group_id) VALUES (?, ?)", (user_id, group_id))
+    conn.commit()
+    cursor.close()
+    conn.close()
     
-#     conn = sqlite3.connect('data.db')
-#     print(conn)
-    
-#     #find group_id based on group_name given (needed for parameter of adding task to db)
-#     sql = """SELECT group_id
-#         from groups
-#         where group_name =  '{}' """.format(groupname)    
-#     cursor = conn.cursor()
-#     groupID = cursor.execute(sql)
-#     numgroupID = 0
-    
-#     for i in groupID:
-#         numgroupID = int(i[0])
-#     print(numgroupID)
-        
-    
-#     #check what the last number is in the task_id of the task table, then increment by one, 
-#     #set it to var, as first argument in next SQL statement (needed for determining the task_id of task to be added to db)
-#     sql = """SELECT task_id from task
-#              ORDER BY task_id 
-#              DESC LIMIT 1"""
-    
-#     taskID = cursor.execute(sql)
-#     numtaskID = 0
-#     for i in taskID:
-#         numtaskID = int(i[0])
-#     print(numtaskID)
-#     numtaskID = numtaskID + 1
-#     print(numtaskID)
-                   
-#     cursor.execute( """INSERT into task (task_id, task_name, task_status, group_id) 
-#                    VALUES (?,?,?,?)""", (numtaskID, taskname, taskstatus, numgroupID))
-    
-#     conn.commit()
-#     cursor.close()
-#     conn.close()
 
 
-# #SQL (mostly) DELETE statement to delete from db 
-# def delete_task(): #argument parameters ---> groupname, taskname
-#     groupname = "group1"
-#     taskname = "file papers"
+
+def group_select_from_username(username):
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT group_name
+        from users
+        INNER JOIN groupinfo on groupinfo.user_id = users.user_id
+        INNER JOIN groups on groups.group_id = groupinfo.group_id
+        WHERE username = ?""",
+        (username,)
+    )
+    fetched = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return fetched
+
+
+#SQL (mainly) INSERT statement to add a task to db
+def insert_task(taskname, groupname, taskstatus): #argument parameters ---> taskname, groupname, taskstatus
+    conn = sqlite3.connect('data.db')
+    print(conn)
     
+    #find group_id based on group_name given (needed for parameter of adding task to db)
+    sql = """SELECT group_id
+        from groups
+        where group_name =  '{}' """.format(groupname)    
+    cursor = conn.cursor()
+    groupID = cursor.execute(sql)                   
+    cursor.execute( """INSERT into task (task_name, task_status, group_id) 
+                   VALUES (?,?,?)""", ( taskname, taskstatus, groupID))
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+#SQL (mostly) DELETE statement to delete from db 
+# def delete_task(groupname, taskname): #argument parameters ---> groupname, taskname 
 #     conn = sqlite3.connect('data.db')
 #     print(conn)
 #     cursor = conn.cursor()
@@ -118,30 +149,10 @@ def find_user(username):
 #     cursor.close()
 #     conn.close()
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 #SQL (mostly) UPDATE statement to update a task in db
-# def update_task(): #argument parameters ---> taskname, groupname, newtaskstatus
-#     groupname = "group1"
+# def update_task(taskname, groupname, newtaskstatus): #argument parameters ---> taskname, groupname, newtaskstatus
 #     taskname = "file papers"
+#     groupname = "group1"
 #     newtaskstatus = "C"
     
 #     conn = sqlite3.connect('data.db')
@@ -169,11 +180,8 @@ def find_user(username):
 #     conn.close()
     
     
-# #SQL (mostly) INSERT statement to add a collaborator to your created group
-# def add_collaborators(): #argument parameters ---> groupname, collaboratorname
-#     groupname = "group3"
-#     collaboratorname = "niki"
-    
+#SQL (mostly) INSERT statement to add a collaborator to your created group
+# def add_collaborator(groupname, collaboratorname): #argument parameters ---> groupname, collaboratorname 
 #     conn = sqlite3.connect('data.db')
 #     print(conn)
 #     cursor = conn.cursor()
@@ -205,25 +213,27 @@ def find_user(username):
 #     print(numgroupInfoID)
     
     
-#     #find userID using username
-#     sql = """SELECT user_id from users
-#              WHERE username = '{}'""".format(collaboratorname )
+    #find userID using username
+    # sql = """SELECT user_id from users
+    #          WHERE username = '{}'""".format(collaboratorname )
     
-#     cursor = conn.cursor()
-#     userID = cursor.execute(sql)
-#     for i in userID:
-#         numuserID = int(i[0])
-#     print(numuserID)
+    # cursor = conn.cursor()
+    # userID = cursor.execute(sql)
+    # for i in userID:
+    #     numuserID = int(i[0])
+    # print(numuserID)
                     
-#     cursor.execute( """INSERT into groupinfo (group_info_id, user_id, group_id) 
-#                    VALUES (?,?,?)""", (numgroupInfoID, numuserID, numgroupID)) 
-#     conn.commit()
-#     cursor.close()
-#     conn.close()
+    # cursor.execute( """INSERT into groupinfo (group_info_id, user_id, group_id) 
+    #                VALUES (?,?,?)""", (numgroupInfoID, numuserID, numgroupID)) 
+    # conn.commit()
+    # cursor.close()
+    # conn.close()
     
+
+
 #-----------------------testing functions with SQL statements here -------------------------#
 #--------- uncomment to test ----------#
-# task_select_by_group_name()
+#task_select_by_group_name()
 #insert_task()
 #delete_task()
 #update_task()

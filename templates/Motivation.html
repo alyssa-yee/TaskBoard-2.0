@@ -8,13 +8,8 @@
     <nav class="nav-bar">
         <div class="nav-items">
             <h3 id="nav-item">
-                <a href="/GroupCreateJoin">
+                <a href="/group">
                     <span id="nav-text">GROUPS</span>
-                </a>
-            </h3>
-            <h3 id="nav-item">
-                <a href="/Task-Page/tasks">
-                    <span id="nav-text">TASKBOARD</span>
                 </a>
             </h3>
             <h3 id="nav-item">
@@ -23,7 +18,7 @@
                 </a>
             </h3>
             <h3 id="nav-item">
-                <a href="/">
+                <a href="/logout">
                 <span id="nav-text">Log out</span>
                 </a>
             </h3>
@@ -37,7 +32,7 @@
         </div>
         <div class="cat-bg">
             <div id="cats">
-                <img src="/motivation_cats.png" alt="Motivational cats"></img>
+                <img src="{{url_for('static', filename='motivation_cats.png')}}" />
             </div>
             <div id='inspire'>
                 <table>

@@ -1,24 +1,30 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
-    <head>
       <title>TaskBoard!</title>
       <link rel="stylesheet" href="/static/styles.css">
   </head>
-  </head>
-  <body class = login-body>
-    <h1>REGISTER</h1>
+  <nav class="nav-bar">
+    <div class="nav-items">
+      <div id="coll-title">WELCOME TO TASK BOARD!</div>
+    </div>
+  </nav>
+  <body>
     <div class = "login-container">
-    <form action="{{ url_for('register_submit')}}" method = "post">
+      <form action="{{ url_for('register_submit')}}" method = "post">
 
-        <p>Username:</p>
-        <p><input type="text" name="register_username"/></p><br>
-    
-        <p>Password:</p>
-        <p><input type="password" name="register_password"/></p>
-    
-        <p><input type="submit" value = "Register" class="submit-button"/></p>
-    </form>
+          <p id = "text">Username:</p>
+          <p><input type="text" name="register_username"/></p><br>
+      
+          <p id = "text">Password:</p>
+          <p><input type="password" name="register_password"/></p>
+
+          <div class = "login-buttons">
+          <p><input type="submit" value = "Register" id="nav-item"/></p>
+          <a href = "{{ url_for('login') }}" id = "create-account-link"> Return </a>
+          </div>
+
+      </form>
     </div>
   </body>
 </html>

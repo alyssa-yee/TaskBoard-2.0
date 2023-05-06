@@ -8,12 +8,12 @@
     <nav class="nav-bar">
         <div class="nav-items">
             <h3 id="nav-item">
-                <a href="/GroupCreateJoin">
+                <a href="/group">
                     <span id="nav-text">GROUPS</span>
                 </a>
             </h3>
             <h3 id="nav-item">
-                <a href="/Task-Page/tasks">
+                <a href="/taskboard">
                     <span id="nav-text">TASKBOARD</span>
                 </a>
             </h3>
@@ -23,7 +23,7 @@
                 </a>
             </h3>
             <h3 id="nav-item">
-                <a href="/">
+                <a href="/logout">
                 <span id="nav-text">Log out</span>
                 </a>
             </h3>
@@ -33,42 +33,79 @@
 <body>
     <div>
         <div class="group">
-            <div id="group-name"> Group Name: </div>
-            <div id="g-name">Meow</div>
+            <div id="group-name"> Group Name:</div>
+            <div id="g-name">{{ group }}</div>
         </div>
-        <div class="task-board">
-            <div class="add">
-                <button class="add-item" id="add-btn">+</button>
+        <div>
+            <div className="form-items">
+                <form action ="{{ url_for('create_task') }}" method = POST>
+                    <label for="task-input">Task:</label>
+                    <input type="text" id="task-input" required>
+                
+                    <label for="status-select">Status:</label>
+                    <select id="status-select" required>
+                    <option value="">--Select status--</option>
+                    <option value="NS">Not Started</option>
+                    <option value="IP">In Progress</option>
+                    <option value="C">Complete</option>
+                    </select>
+                
+                    <input type="submit" value="Add Task">
+                </form>
             </div>
-            
+        </div>
             <div class="board--container">
                 <div class="board--card">
                     <div class="task-container">
-                        <div id="progress">Tasks</div>
+                        <div id="progress">NOT STARTED</div>
                         <div class="curr-tasks">
-                            <div class="curr-task-container">
-                                <p>task item</p>
-                            </div>
+                            {% for task in tasks %}
+                                {% if task[1] == "NS" %}
+                                <div class="curr-task-container">
+                                    <p>{{ task[0] }}</p>
+                                    <button class="status-btn" id="add-btn">⛔</button>
+                                    <button class="status-btn" id="add-btn">NS</button>
+                                    <button class="status-btn" id="add-btn">IP</button>
+                                    <button class="status-btn" id="add-btn">✔</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div class="board--card">
                     <div class="task-container">
-                        <div id="progress">Tasks</div>
+                        <div id="progress">IN-PROGRESS</div>
                         <div class="curr-tasks">
-                            <div class="curr-task-container">
-                                <p>task item</p>
-                            </div>
+                            {% for task in tasks %}
+                                {% if task[1] == "IP" %}
+                                <div class="curr-task-container">
+                                    <p>{{ task[0] }}</p>
+                                    <button class="status-btn" id="add-btn">⛔</button>
+                                    <button class="status-btn" id="add-btn">NS</button>
+                                    <button class="status-btn" id="add-btn">IP</button>
+                                    <button class="status-btn" id="add-btn">✔</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div class="board--card">
                     <div class="task-container">
-                        <div id="progress">Tasks</div>
+                        <div id="progress">COMPLETE</div>
                         <div class="curr-tasks">
-                            <div class="curr-task-container">
-                                <p>task item</p>
-                            </div>
+                            {% for task in tasks %}
+                                {% if task[1] == "C" %}
+                                <div class="curr-task-container">
+                                    <p>{{ task[0] }}</p>
+                                    <button class="status-btn" id="add-btn">⛔</button>
+                                    <button class="status-btn" id="add-btn">NS</button>
+                                    <button class="status-btn" id="add-btn">IP</button>
+                                    <button class="status-btn" id="add-btn">✔</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

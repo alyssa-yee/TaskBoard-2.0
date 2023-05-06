@@ -342,6 +342,7 @@ label {
   }
   #progress {
     font-size: 15px;
+    justify-content: center;
   }
 }
 @media only screen and (max-width: 870px) {
@@ -414,4 +415,51 @@ label {
   img {
     width: 370px;
   }
+}
+
+.status-btn{
+  color: #D9ED92;
+  border: solid 3px #0c2a54;
+  box-shadow: -2px 2px #0c2a54;
+  font-size: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #1A759F;
+}
+
+#group-div{
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#group-body{
+  display: flex;
+  justify-content: center;
+}
+
+.login-container{
+  display: flex;
+  justify-content: center;
+}
+
+.login-buttons{
+  display: flex;
+  justify-content: center;
+}
+
+#text{
+  color:#D9ED92
+}
+
+.Login-Btn{
+  background-color: black;
+  color: #D9ED92;
+}
+
+#create-account-link{
+  color: #D9ED92;
+  display: flex;
+  padding-top: 50px;
+  margin-left: 20px;
 }
