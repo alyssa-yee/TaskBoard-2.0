@@ -17,6 +17,9 @@ def register():
 def taskboard():
     return render_template('Taskboard.html')
 
+@app.route('/motivation')
+def motivation():
+    return render_template('Motivation.html')
 
 # Request Routes
 @app.route('/login_submit', methods=['POST'])

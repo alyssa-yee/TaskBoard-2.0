@@ -25,13 +25,6 @@ def find_user(username):
     conn.close()
     return fetched
 
-
-
-
-
-
-
-
 #SQL managining dashboard statements -------- Nikita's code
 
 
