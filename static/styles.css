@@ -422,9 +422,14 @@ label {
   border: solid 3px #0c2a54;
   box-shadow: -2px 2px #0c2a54;
   font-size: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   background: #1A759F;
+}
+
+.update-btns{
+  display: flex;
+  flex-direction: row;
 }
 
 #group-div{

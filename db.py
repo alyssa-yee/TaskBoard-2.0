@@ -135,6 +135,18 @@ def update_task(task_id, task_status):
     cursor.close()
     conn.close()
 
+def delete(task_id):
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM task WHERE task_id = ?", 
+        (task_id,)
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
 #SQL (mostly) DELETE statement to delete from db 
 # def delete_task(groupname, taskname): #argument parameters ---> groupname, taskname 
 #     conn = sqlite3.connect('data.db')
