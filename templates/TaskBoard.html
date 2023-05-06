@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>TaskBoard</title>
-        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/static/styles.css">
     </head>
 
-    <nav className="nav-bar">
-        <div className="nav-items">
+    <nav class="nav-bar">
+        <div class="nav-items">
             <h3 id="nav-item">
                 <a href="/GroupCreateJoin">
                     <span id="nav-text">GROUPS</span>
@@ -39,11 +39,13 @@
         <div class="task-board">
             <div class="add"></div>
             <div class="board--container">
-                <div class="task-container">
-                    <div id="progress">Tasks</div>
-                    <div class="curr-tasks">
-                        <div className="curr-task-container">
-                            <p>task item</p>
+                <div class="board--card">
+                    <div class="task-container">
+                        <div id="progress">Tasks</div>
+                        <div class="curr-tasks">
+                            <div className="curr-task-container">
+                                <p>task item</p>
+                            </div>
                         </div>
                     </div>
                 </div>
