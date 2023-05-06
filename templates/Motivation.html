@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TaskBoard</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+
+    <nav class="nav-bar">
+        <div class="nav-items">
+            <h3 id="nav-item">
+                <a href="/GroupCreateJoin">
+                    <span id="nav-text">GROUPS</span>
+                </a>
+            </h3>
+            <h3 id="nav-item">
+                <a href="/Task-Page/tasks">
+                    <span id="nav-text">TASKBOARD</span>
+                </a>
+            </h3>
+            <h3 id="nav-item">
+                <a href="/Motivation">
+                    <span id="nav-text">MOTIVATION...</span>
+                </a>
+            </h3>
+            <h3 id="nav-item">
+                <a href="/">
+                <span id="nav-text">Log out</span>
+                </a>
+            </h3>
+        </div>
+    </nav>
+    
+<body>
+    <div>
+        <div>
+          <title>Motivation</title>
+        </div>
+        <div class="cat-bg">
+            <div id="cats">
+                <img src="/images/motivation_cats.png" alt="Motivational cats"></img>
+            </div>
+            <div id='inspire'>
+                <table>
+                    <tr>
+                        <td><span id="quote"></span></td>
+                        <td>-</td>
+                        <td><span id="author"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+      </div>
+</body>
+<script>
+    const api_url = "https://api.goprogram.ai/inspiration/";
+    
+    async function getQuote() {
+    
+      // Making an API call (request)
+      // and getting the response back
+      const response = await fetch(api_url);
+    
+      // Parsing it to JSON format
+      const data = await response.json();
+      console.log(data)
+    
+      // Retrieving data from JSON
+      let { quote } = data;
+      let { author } = data;
+    
+      // accessing the span container
+      document.querySelector("#quote").textContent = quote;
+      document.querySelector("#author").textContent = author;
+    }
+    
+    // Calling the function
+    getQuote()
+</script>
+
+</html>
