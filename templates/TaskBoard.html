@@ -38,19 +38,19 @@
         </div>
         <div>
             <div className="form-items">
-                <form action ="{{ url_for('create_task') }}" method = POST>
-                    <label for="task-input">Task:</label>
-                    <input type="text" id="task-input" required>
+                <form action ="{{ url_for('create_task') }}" method = "post">
+                    <label class = "add-task-labels"for="task-input">Task:</label>
+                    <input type="text" id="nav-item-spec" name="task_name" required />
                 
-                    <label for="status-select">Status:</label>
-                    <select id="status-select" required>
+                    <label class = "add-task-labels" for="status-select">Status:</label>
+                    <select id="nav-item" name="task_status" required>
                     <option value="">--Select status--</option>
                     <option value="NS">Not Started</option>
                     <option value="IP">In Progress</option>
                     <option value="C">Complete</option>
                     </select>
                 
-                    <input type="submit" value="Add Task">
+                    <input id="nav-item" type="submit" value="Add Task">
                 </form>
             </div>
         </div>

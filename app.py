@@ -77,10 +77,10 @@ def join_group():
 @app.route('/create_task', methods=['POST'])
 def create_task():
     group = session.get('group')
-    task = request.form.get('task')
-    status = request.form.get('status')
+    task = request.form['task_name']
+    status = request.form['task_status']
     insert_task(task, group, status)
-    return ('', 204) 
+    return redirect(url_for('taskboard'))
 
 
 

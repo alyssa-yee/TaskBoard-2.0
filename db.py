@@ -114,7 +114,9 @@ def insert_task(taskname, groupname, taskstatus): #argument parameters ---> task
         from groups
         where group_name =  '{}' """.format(groupname)    
     cursor = conn.cursor()
-    groupID = cursor.execute(sql)                   
+    cursor.execute(sql)             
+    fetched = cursor.fetchone()    
+    groupID = fetched[0]  
     cursor.execute( """INSERT into task (task_name, task_status, group_id) 
                    VALUES (?,?,?)""", ( taskname, taskstatus, groupID))
     

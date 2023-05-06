@@ -463,3 +463,17 @@ label {
   padding-top: 50px;
   margin-left: 20px;
 }
+
+.add-task-labels{
+  display: inline-flex;
+  position: center;
+
+}
+
+#nav-item-spec {
+  padding: 7px;
+  margin: 7px;
+  border: solid 3px #0c2a54;
+  box-shadow: -5px 5px #0c2a54;
+  color: #0c2a54;
+}
