@@ -10,12 +10,12 @@ cur = conn.cursor()
 print ("Opened database successfully")
 
 
-conn.execute('''INSERT INTO users (user_id, username, passcode)
-VALUES 
-   (1,"niki","123"),
-   (2,"alyssa","123"),
-   (3,"soraya","123");'''  
-)
+# conn.execute('''INSERT INTO users (user_id, username, passcode)
+# VALUES 
+#    (1,"niki","123"),
+#    (2,"alyssa","123"),
+#    (3,"soraya","123");'''  
+# )
 
 conn.execute('''INSERT INTO groups (group_id, group_name)
 VALUES

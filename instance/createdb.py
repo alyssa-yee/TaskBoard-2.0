@@ -7,8 +7,8 @@ def create_database():
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
     conn.execute('''CREATE TABLE users
-        (user_id     INT PRIMARY KEY     NOT NULL UNIQUE,
-         username    TEXT                NOT NULL,
+        (user_id     INT PRIMARY KEY     ,
+         username    TEXT                NOT NULL UNIQUE,
          passcode    TEXT                NOT NULL);''')
 
     conn.execute('''CREATE TABLE groups
