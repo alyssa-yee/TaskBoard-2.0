@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from db import add_user, find_user, task_select_by_group_name, get_groups, group_select_from_username, find_group, add_user_to_group, insert_task
+from db import add_user, find_user, task_select_by_group_name, get_groups, group_select_from_username, find_group, add_user_to_group, insert_task, update_task
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
 
@@ -82,9 +82,15 @@ def create_task():
     insert_task(task, group, status)
     return redirect(url_for('taskboard'))
 
+@app.route('/update_status/<int:task_id>', methods=['POST'])
+def update_status(task_id):
+    new_status = request.form['new_status']
+    update_task(task_id, new_status)
+    return redirect(url_for('taskboard'))
 
-
-
+@app.route('/delete_task/<int:task_id>')
+def delete_task(task_id):
+    return redirect(url_for(taskboard))
 # -------------APP RUNNING--------------------
 if __name__ == "__main__":
     app.run(debug=True)

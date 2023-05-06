@@ -32,7 +32,7 @@ def find_user(username):
 def task_select_by_group_name(groupname): #argument parameters ---> groupname
     conn = sqlite3.connect('data.db')
     print(conn)
-    sql =  """SELECT task_name, task_status 
+    sql =  """SELECT *
         from task
         inner join groups on groups.group_id = task.group_id AND group_name = '{}' """.format(groupname)    
     cursor = conn.cursor()
@@ -124,6 +124,16 @@ def insert_task(taskname, groupname, taskstatus): #argument parameters ---> task
     cursor.close()
     conn.close()
 
+def update_task(task_id, task_status):
+    conn = sqlite3.connect('data.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE task SET task_status = ? WHERE task_id = ?", 
+        (task_status, task_id)
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 #SQL (mostly) DELETE statement to delete from db 
 # def delete_task(groupname, taskname): #argument parameters ---> groupname, taskname 

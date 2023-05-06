@@ -60,13 +60,21 @@
                         <div id="progress">NOT STARTED</div>
                         <div class="curr-tasks">
                             {% for task in tasks %}
-                                {% if task[1] == "NS" %}
+                                {% if task[2] == "NS" %}
                                 <div class="curr-task-container">
-                                    <p>{{ task[0] }}</p>
-                                    <button class="status-btn" id="add-btn">⛔</button>
-                                    <button class="status-btn" id="add-btn">NS</button>
-                                    <button class="status-btn" id="add-btn">IP</button>
-                                    <button class="status-btn" id="add-btn">✔</button>
+                                    <p>{{ task[1] }}</p>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="NS">NS</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="IP">IP</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="C">✔</button>
+                                    </form>
+                                    <form action="{{ url_for('delete_task', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="delete" value="true">⛔</button>
+                                    </form>
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -78,13 +86,21 @@
                         <div id="progress">IN-PROGRESS</div>
                         <div class="curr-tasks">
                             {% for task in tasks %}
-                                {% if task[1] == "IP" %}
+                                {% if task[2] == "IP" %}
                                 <div class="curr-task-container">
-                                    <p>{{ task[0] }}</p>
-                                    <button class="status-btn" id="add-btn">⛔</button>
-                                    <button class="status-btn" id="add-btn">NS</button>
-                                    <button class="status-btn" id="add-btn">IP</button>
-                                    <button class="status-btn" id="add-btn">✔</button>
+                                    <p>{{ task[1] }}</p>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="NS">NS</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="IP">IP</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="C">✔</button>
+                                    </form>
+                                    <form action="{{ url_for('delete_task', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="delete" value="true">⛔</button>
+                                    </form>
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -96,13 +112,21 @@
                         <div id="progress">COMPLETE</div>
                         <div class="curr-tasks">
                             {% for task in tasks %}
-                                {% if task[1] == "C" %}
-                                <div class="curr-task-container">
-                                    <p>{{ task[0] }}</p>
-                                    <button class="status-btn" id="add-btn">⛔</button>
-                                    <button class="status-btn" id="add-btn">NS</button>
-                                    <button class="status-btn" id="add-btn">IP</button>
-                                    <button class="status-btn" id="add-btn">✔</button>
+                                {% if task[2] == "C" %}
+                                 <div class="curr-task-container">
+                                    <p>{{ task[1] }}</p>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="NS">NS</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="IP">IP</button>
+                                    </form>
+                                    <form action="{{ url_for('update_status', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="new_status" value="C">✔</button>
+                                    </form>
+                                    <form action="{{ url_for('delete_task', task_id=task[0]) }}" method="POST">
+                                        <button class="status-btn" type="submit" name="delete" value="true">⛔</button>
+                                    </form>
                                 </div>
                                 {% endif %}
                             {% endfor %}
