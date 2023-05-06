@@ -15,6 +15,16 @@ def login_submit():
     session['password'] = password_var
     return redirect(url_for('login_username_and_password_check'))
 
+
+
+@app.route('/register_submit', methods=['POST'])
+def login_submit():
+    username_var = request.form['register_username']
+    password_var = request.form['register_password']
+    session['reg_username'] = username_var
+    session['reg_password'] = password_var
+
+
 # -------------APP RUNNING--------------------
 if __name__ == "__main__":
     app.run(debug=True)
