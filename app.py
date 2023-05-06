@@ -15,8 +15,7 @@ def register():
 
 @app.route('/taskboard')
 def taskboard():
-    curr_user = session.get('username')
-    group = group_select_from_username(curr_user)
+    group = find_group(session.get('group'))
     tasks = task_select_by_group_name(group[0])
     return render_template('Taskboard.html', tasks = tasks, group = group[0])
 
